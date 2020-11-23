@@ -31,24 +31,30 @@ int lat_curve(int tas, int bank, int arc, int hpre, int latpre, int lonpre)
 }
 
 int lon_curve(int tas, int bank, int arc, int hpre, int latpre, int lonpre) 
-
+//(m/s,degrees,degrees,degrees,degrees*10,degrees*10)
+//need: (m/s,radians,radians,radians,radians,radians)
 {
-    int latpre2 = latpre/10;
-    int lonpre2 = lonpre/10;
     int pi = 3.14;
+    int latpre2 = (latpre/10)*(pi/180);
+    int lonpre2 = (lonpre/10)*(pi/180);
+    bank = bank*(pi/180);
+    arc = arc*(pi/180);
+    //hpre = hpre*(pi/180);
+
+    
     int rearth = 6371000;
     int h_center;
     int br;
 
     if (bank < 0){
-        h_center = (hpre - 90)*(pi / 180);
-        int b = (hpre*(pi/180))+(pi/2);
-        br = b - arc;
+        h_center = (hpre - 90)*(pi / 180); //radians = degrees*(pi/180)
+        int b = (hpre*(pi/180))+(pi/2); //radians
+        br = b - arc; //radians = radians-radians
     }
     else if (bank > 0){
-        h_center = (hpre + 90)*(pi/180);
-        int a = (hpre*(pi/180))-(pi/2);
-        br = a + arc;
+        h_center = (hpre + 90)*(pi/180); //radians = degrees*(pi/180)
+        int a = (hpre*(pi/180))-(pi/2); //radians = degrees*(pi/180)
+        br = a + arc; //radians = radians+radians
     }
     
     int r = abs(pow(tas,2));
