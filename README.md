@@ -5,4 +5,5 @@ This repository will include the files for my final project.  The anticipated st
 README.md  
 AERE_407_Project_Proposal.pdf  
 Report.pdf - file for final report  
-Model/ - Promela and C files involved in the system model
+test.pml - Promela Model
+function1.h - C functions
